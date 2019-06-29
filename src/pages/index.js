@@ -3,23 +3,24 @@ import Styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
 import 'reset-css';
+import propTypes from 'prop-types';
 import logo from '../svgs/qantas.svg';
-import hotels from '../data/hotels.json';
 import Hotel from '../components/hotel';
 import order from '../funcs/order';
 
 class IndexPage extends Component {
-  constructor() {
+  constructor(props) {
     super();
+
     this.state = {
-      hotels,
+      hotels: Object.values(props.pathContext),
       city: 'Sydney'
     };
   }
 
   handleFormChange(event) {
     this.setState({
-      hotels: order(hotels, 'price', event.target.value)
+      hotels: order(this.state.hotels, 'price', event.target.value)
     });
   }
 
@@ -31,7 +32,10 @@ class IndexPage extends Component {
           <img src={logo} className="logo" alt="Qantas Logo" />
           <header>
             <p>
-              <strong>{this.state.hotels.length} </strong>
+              <strong>
+{this.state.hotels.length}
+{' '}
+ </strong>
               <i>Hotels in </i>
               <strong>{this.state.city}</strong>
             </p>
@@ -53,6 +57,10 @@ class IndexPage extends Component {
     );
   }
 }
+
+IndexPage.propTypes = {
+  pathContext: propTypes.shape.isRequired
+};
 
 const Container = Styled.section`
   width: 792px;

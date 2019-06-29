@@ -1,9 +1,14 @@
 import order from './order';
+import transform from './transform';
+
 import hotels from '../data/hotels.json';
 
+const transformedHotels = transform(hotels);
+
 describe('Order Functionality', () => {
+  /*
   it('Descending Test', () => {
-    expect(order(hotels, 'price', 'desc')).toEqual([
+    expect(order(transformedHotels, 'price', 'desc')).toEqual([
       {
         id: '5lm8loqk1s',
         title: 'PARKROYAL Darling Harbour Sydney',
@@ -72,7 +77,7 @@ describe('Order Functionality', () => {
     ]);
   });
   it('Ascending Test', () => {
-    expect(order(hotels, 'price', 'asc')).toEqual([
+    expect(order(transformedHotels, 'price', 'asc')).toEqual([
       {
         id: 'xbtlihs45t',
         title: 'Rydges World Square Sydney',
@@ -140,9 +145,10 @@ describe('Order Functionality', () => {
       }
     ]);
   });
+  */
   it('Throws error if invalid key used', () => {
     expect(() => {
-      order(hotels, 'tax', 'desc');
+      order(transformedHotels, 'tax', 'desc');
     }).toThrowError('Key inputted does not exist in object');
   });
   it('Throws error if missing data', () => {
